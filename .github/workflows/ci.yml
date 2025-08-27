@@ -24,8 +24,11 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
+      - name: List files
+        run: ls -la
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Verify pnpm
         run: pnpm --version
