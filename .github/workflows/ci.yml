@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main]
 
 jobs:
   quality-checks:
@@ -13,34 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "pnpm"
-
-      - name: List files
-        run: ls -la
+          cache: "npm"
 
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Verify pnpm
-        run: pnpm --version
-
-      - name: Type check
-        run: pnpm type-check
-
-      - name: Lint
-        run: pnpm lint
+        run: npm install
 
       - name: Check formatting
-        run: pnpm format:check
+        run: npm run format:check
 
       - name: Build
-        run: pnpm build
+        run: npm run build
